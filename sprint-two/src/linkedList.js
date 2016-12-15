@@ -4,7 +4,7 @@ var LinkedList = function() {
   list.tail = null;
 
   list.addToTail = function(value) {
-
+    //time complexity: O(c)
     if (list.head === null) {
       var node = Node(value);
       list.tail = node;
@@ -18,6 +18,7 @@ var LinkedList = function() {
   };
 
   list.removeHead = function() {
+    //time complexity O(c)
     var temp = list.head;
     list.head = list.head.next;
     return temp.value;
@@ -25,6 +26,7 @@ var LinkedList = function() {
   };
 
   list.contains = function(target) {
+    //time complexity: O(n)
     var currentNode = list.head;
     while(currentNode) {
       if (target === currentNode.value) {
