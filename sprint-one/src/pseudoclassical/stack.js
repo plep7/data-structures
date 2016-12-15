@@ -19,4 +19,3 @@ Stack.prototype.size = function() {
   return this.currentSize >= 0 ? this.currentSize : 0;
 };
 
-
