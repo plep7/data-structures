@@ -32,6 +32,7 @@ describe('graph', function() {
     graph.addNode(1);
     graph.addNode(3);
     graph.addEdge(3, 2);
+    console.log(graph);
     expect(graph.hasEdge(3, 2)).to.equal(true);
     expect(graph.hasEdge(3, 1)).to.equal(false);
   });
