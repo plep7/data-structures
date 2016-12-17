@@ -3,16 +3,11 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
-  // this._storage.each(function(val, i, storageArray) {
-  //   for (var i = 0; i < this._limit - 1; i++){
-  //     storageArray[i] = [];
-  //   }
-  // });
 };
 
 HashTable.prototype.insert = function(k, v) {
-
-  // debugger;
+//O(1) constant if buckets are evenly distributed and sufficiently small
+//O(n) if a bucket approaches n
   var index = getIndexBelowMaxForKey(k, this._limit);
   var tuple = [k, v];
   // if our current storage doesnt have a bucket, make a bucket and push the tuple
@@ -35,6 +30,8 @@ HashTable.prototype.insert = function(k, v) {
   this._storage.set(index, bucket);
 };
 
+//O(1) constant if buckets are evenly distributed and sufficiently small
+//O(n) if a bucket approaches n
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
@@ -43,9 +40,10 @@ HashTable.prototype.retrieve = function(k) {
       return bucket[i][1];
     }
   }
-  console.log('key doesnt exist');
 };
 
+//O(1) constant if buckets are evenly distributed and sufficiently small
+//O(n) if a bucket approaches n
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   var bucket = this._storage.get(index);
