@@ -61,4 +61,18 @@ describe('tree', function() {
     expect(tree.contains(6)).to.equal(false);
   });
 
+  it('should be able to traverse the tree and perform a callback function on each value', function() {
+   
+    function pushValue(val) {
+       return val;
+    }
+    tree.value = 4;
+    tree.addChild(5);
+    tree.addChild(7);
+    tree.children[0].addChild(6);
+    tree.children[0].addChild(8);
+    tree.children[0].children[0].addChild(9);
+    tree.children[0].children[0].addChild(10);
+    expect(tree.traverse(pushValue)).to.eql([4, 5, 6, 9, 10, 8, 7]);
+  });
 });

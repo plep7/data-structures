@@ -21,7 +21,21 @@ treeMethods.addChild = function(value) {
   childNode.parent = this.value;
   this.children.push(childNode);
 };
-
+var results = [];
+treeMethods.traverse = function(cb) {
+  results.push(cb(this.value));
+  var currentNode = this;
+  function recurseTree(currentNode) {
+    if (currentNode.children.length > 0) {
+      for (var i = 0; i < currentNode.children.length; i++) {
+        results.push(cb(currentNode.children[i].value));
+        recurseTree(currentNode.children[i]);
+      }
+    }
+  }
+  recurseTree(currentNode);
+  return results;
+};
 treeMethods.removeFromParent = function(target) {
   if (!this.contains(target)){
     console.log("Value does not exist in tree");
