@@ -3,6 +3,7 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this.counter = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -14,9 +15,40 @@ HashTable.prototype.insert = function(k, v) {
   // else retrieve that bucket
     // check if the bucket has the passed in key and overwrite it
     // else add the tuple to the bucket;
+  // if (this.counter / this._limit <= 0.25 && this._limit > 8) {
+  //   this.counter = 0;
+  //   this._limit = this._limit / 2;
+  //   var oldHashTable = this._storage;
+  //   this._storage = LimitedArray(this._limit);
+  //   var that = this;
+  //   oldHashTable.each(function(bucket, index, storage) {
+  //     if (bucket) {
+  //       for (var j = 0; j < bucket.length; j++) {
+  //         that.insert(bucket[j][0], bucket[j][1]);
+  //       }
+  //     }
+  //   });
+  // }
+  if (this.counter / this._limit >= 0.75) {
+    this.counter = 0;
+    this._limit = this._limit * 2;
+    var oldHashTable = this._storage;
+    this._storage = LimitedArray(this._limit);
+    var that = this;
+    oldHashTable.each(function(bucket, index, storage) {
+      if (bucket) {
+        for (var j = 0; j < bucket.length; j++) {
+          that.insert(bucket[j][0], bucket[j][1]);
+        }
+      }
+    });
+  }
+  
+
   if (this._storage.get(index) === undefined) { 
     var bucket = [];
     bucket.push(tuple);
+    this.counter++;
   } else {
     var bucket = this._storage.get(index);
     for (var i = 0; i < bucket.length; i++) {
@@ -53,6 +85,8 @@ HashTable.prototype.remove = function(k) {
     }
   }
 };
+
+
 
 
 
