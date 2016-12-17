@@ -16,7 +16,7 @@ describe('linkedList', function() {
     expect(linkedList.contains).to.be.a('function');
   });
 
-  it('should designate a new tail when new nodes are added', function() {
+  it('should designate a new tail when new nodes are added to the tail', function() {
     linkedList.addToTail(4);
     expect(linkedList.tail.value).to.equal(4);
     linkedList.addToTail(5);
@@ -49,6 +49,27 @@ describe('linkedList', function() {
     linkedList.addToTail(5);
     linkedList.removeHead();
     expect(linkedList.contains(4)).to.equal(false);
+  });
+
+  it('should designate a new head when nodes are added to head', function() {
+    linkedList.addToHead(8);
+    expect(linkedList.head.value).to.equal(8);
+    linkedList.addToHead(6);
+    expect(linkedList.head.value).to.equal(6);
+  });
+
+  it('should assign null to the new heads previous method', function() {
+    linkedList.addToHead(8);
+    expect(linkedList.head.prev).to.equal(null);
+    linkedList.addToHead(6);
+    expect(linkedList.head.prev).to.equal(null);
+  });
+
+  it('should designate the previous node when the current tail is removed', function() {
+    linkedList.addToHead(8);
+    linkedList.addToHead(6);
+    linkedList.removeTail();
+    expect(linkedList.head.value).to.equal(6);
   });
 
   // add more tests here to test the functionality of linkedList
