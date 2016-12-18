@@ -64,7 +64,7 @@ describe('tree', function() {
   it('should be able to traverse the tree and perform a callback function on each value', function() {
    
     function pushValue(val) {
-       return val;
+      return val;
     }
     tree.value = 4;
     tree.addChild(5);
