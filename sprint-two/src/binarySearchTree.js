@@ -93,9 +93,9 @@ binaryTree.breadthFirstLog = function(cb) {
       if (currentLevel[i].right) {
         children.push(currentLevel[i].right);
       }
-      currentLevel = children;
-      children = [];
     }
+    currentLevel = children;
+    children = [];
     if (currentLevel.length > 0) {
       recurseTree();
     }
